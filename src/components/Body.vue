@@ -6,9 +6,24 @@
             <div class="form-row">
                 <div class="col-md-12 my-2">
                     <label for="title">Title</label>
-              <input type="text" name="title" v-model.lazy="blog.title" class="form-control" placeholder="Title">
-              <label for="content" slot="cont-sm-group-a">Content</label>
-              <textarea name="content" v-model.lazy="blog.content" cols="3" class="form-control" placeholder="Content"></textarea>
+                    <input type="text" name="title" v-model.lazy="blog.title" class="form-control" placeholder="Title">
+                    <label for="content" slot="cont-sm-group-a">Content</label>
+                    <textarea name="content" v-model.lazy="blog.content" cols="3" class="form-control" placeholder="Content"></textarea>
+                </div>
+                <div class="col-md-12">
+                    <h6>Categories</h6>
+                    <label for="adventure" class="d-inline-block mr-2">Adventure</label>
+                    <input type="checkbox" name="adventure" value="Adventure" v-model="blog.categories" class="d-inline-block mr-2" id="">
+                    <label for="" class="d-inline-block mr-2">Best Selling</label>
+                    <input type="checkbox" name="best-selling" value="Best-Selling" v-model="blog.categories" class="d-inline-block mr-2" id="">
+                    <label for="" class="d-inline-block mr-2">Comic</label>
+                    <input type="checkbox" name="comic" value="Comic" v-model="blog.categories" class="d-inline-block mr-2" id="">
+                </div>
+                <div class="col-md-12">
+                    <h6>Authors</h6>
+                    <select name="" v-model="blog.author" id="">
+                      <option v-for="(author,index) in authors" :key="index">{{author}}</option>
+                    </select>
                 </div>
                 <div class="col-md-12">
                     <h2>Preview</h2>
@@ -16,6 +31,11 @@
                         <p>Title: {{blog.title}}</p>
                         <p>Content: </p>
                         <p class="ml-4">{{blog.content}}</p>
+                        <p> Category</p>
+                        <ul>
+                          <li v-for="(category,index) in blog.categories" v-bind:key="index" class=""> {{category}}</li>
+                        </ul>
+                        <p> Author: {{blog.author}}</p>
                     </div>
                 </div>
                 <div class="col-md-12 my-2">
@@ -36,7 +56,10 @@ export default {
           blog:{
               title:'',
               content:'',
+              categories:[],
+              author:"",
           },
+          authors:['Dave Doro','John Doe','David Eke'],
           title:"VUE Form Lession"
       }
   },
@@ -58,20 +81,6 @@ div h1 {
 h1{
     color:#222;
 }
-ul{
-  display: flex;
-  max-width: 1200px;
-  margin: 40px auto;
-  box-sizing: border-box;
-  list-style-type: none;
-}
-li{
-  flex-grow: 1;
-  flex-basis: 300px;
-  text-align: center;
-  padding: 30px;
-  border:1px solid #222;
-  margin: 10px;
-}
+
 
 </style>
