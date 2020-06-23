@@ -19,14 +19,6 @@ export default {
             copyright: "Lara-Vue 2020",
         }        
     },
-    methods:{
-        
-    },
-    created(){
-        bus.$on('titleChange',(data)=>{
-                this.title = data
-        });
-    }
 }
 </script>
 <style scoped>
