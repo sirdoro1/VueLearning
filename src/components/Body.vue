@@ -2,7 +2,7 @@
   <div>
     <h4>{{title}}</h4>
     <div>
-        <form action="" class="form" @submit.prevent="submitForm">
+        <form class="form">
             <div class="form-row">
                 <div class="col-md-12 my-2">
                     <label for="title">Title</label>
@@ -39,7 +39,7 @@
                     </div>
                 </div>
                 <div class="col-md-12 my-2">
-                    <input type="submit" value="Submit Form" class="btn btn-md btn-primary col-md-12 mt-2">
+                    <button type="button" v-on:click.prevent="submitForm" class="btn btn-md btn-primary col-md-12 mt-2">Submit Form</button>
                 </div>
             </div>
         </form>
