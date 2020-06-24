@@ -1,7 +1,7 @@
 <template>
   <div>
     <h4>{{title}}</h4>
-    <div>
+    <div v-show="!submitted">
         <form action="" class="form" @submit.prevent="submitForm">
             <div class="form-row">
                 <div class="col-md-12 my-2">
@@ -44,6 +44,9 @@
             </div>
         </form>
     </div>
+    <div v-show="submitted">
+      <h3>Form submitted successfully</h3>
+    </div>
   </div>
 </template>
 
@@ -60,15 +63,24 @@ export default {
               author:"",
           },
           authors:['Dave Doro','John Doe','David Eke'],
-          title:"VUE Form Lession"
+          title:"VUE Form Lesson",
+          submitted:false,
       }
   },
   methods:{
     submitForm(){
-      swal({
-            title: this.blog.title,
-            text: this.blog.content
-        });
+      this.$http.post('https://jsonplaceholder.typicode.com/posts',{
+        title:this.blog.title,
+        body: this.blog.content,
+        userId: 1,
+      }).then((data)=>{
+        swal({
+          title: data.body.title,
+          text: data.body.body,
+        });        
+      },(error)=>{
+        console.log(error)
+      });
     }
   }
 }
