@@ -1,51 +1,15 @@
 <template>
   <div>
     <h4>{{title}}</h4>
-    <div v-show="!submitted">
-        <form action="" class="form" @submit.prevent="submitForm">
-            <div class="form-row">
-                <div class="col-md-12 my-2">
-                    <label for="title">Title</label>
-                    <input type="text" name="title" v-model.lazy="blog.title" class="form-control" placeholder="Title">
-                    <label for="content" slot="cont-sm-group-a">Content</label>
-                    <textarea name="content" v-model.lazy="blog.content" cols="3" class="form-control" placeholder="Content"></textarea>
-                </div>
-                <div class="col-md-12">
-                    <h6>Categories</h6>
-                    <label for="adventure" class="d-inline-block mr-2">Adventure</label>
-                    <input type="checkbox" name="adventure" value="Adventure" v-model="blog.categories" class="d-inline-block mr-2" id="">
-                    <label for="" class="d-inline-block mr-2">Best Selling</label>
-                    <input type="checkbox" name="best-selling" value="Best-Selling" v-model="blog.categories" class="d-inline-block mr-2" id="">
-                    <label for="" class="d-inline-block mr-2">Comic</label>
-                    <input type="checkbox" name="comic" value="Comic" v-model="blog.categories" class="d-inline-block mr-2" id="">
-                </div>
-                <div class="col-md-12">
-                    <h6>Authors</h6>
-                    <select name="" v-model="blog.author" id="">
-                      <option v-for="(author,index) in authors" :key="index">{{author}}</option>
-                    </select>
-                </div>
-                <div class="col-md-12">
-                    <h2>Preview</h2>
-                    <div>
-                        <p>Title: {{blog.title}}</p>
-                        <p>Content: </p>
-                        <p class="ml-4">{{blog.content}}</p>
-                        <p> Category</p>
-                        <ul>
-                          <li v-for="(category,index) in blog.categories" v-bind:key="index" class=""> {{category}}</li>
-                        </ul>
-                        <p> Author: {{blog.author}}</p>
-                    </div>
-                </div>
-                <div class="col-md-12 my-2">
-                    <input type="submit" value="Submit Form" class="btn btn-md btn-primary col-md-12 mt-2">
-                </div>
-            </div>
-        </form>
-    </div>
-    <div v-show="submitted">
-      <h3>Form submitted successfully</h3>
+    <div>
+      <div v-for="(blog,index) in blogs" v-bind:key="index" class="card card-body my-2">
+         <h4>
+           {{blog.title}}
+         </h4>
+         <p>
+           {{blog.body}}
+         </p>
+      </div>
     </div>
   </div>
 </template>
@@ -56,32 +20,20 @@ export default {
   name: 'app',
   data(){
       return {
-          blog:{
-              title:'',
-              content:'',
-              categories:[],
-              author:"",
-          },
-          authors:['Dave Doro','John Doe','David Eke'],
-          title:"VUE Form Lesson",
-          submitted:false,
+          title:"VUE HTTP-GET Request",
+          blogs:[],
       }
   },
   methods:{
-    submitForm(){
-      this.$http.post('https://jsonplaceholder.typicode.com/posts',{
-        title:this.blog.title,
-        body: this.blog.content,
-        userId: 1,
-      }).then((data)=>{
-        swal({
-          title: data.body.title,
-          text: data.body.body,
-        });        
+    
+  },
+  created(){
+     this.$http.get('https://jsonplaceholder.typicode.com/posts')
+      .then((data)=>{
+          this.blogs = data.body.slice(0,10)
       },(error)=>{
         console.log(error)
       });
-    }
   }
 }
 </script>
