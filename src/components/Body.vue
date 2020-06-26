@@ -1,9 +1,9 @@
 <template>
   <div>
     <h4>{{title}}</h4>
-    <div>
-      <div v-for="(blog,index) in blogs" v-bind:key="index" class="card card-body my-2">
-         <h4>
+    <div >
+      <div v-back-rainbow v-for="(blog,index) in blogs" v-bind:key="index" class=" card card-body my-2">
+         <h4 v-rainbow>
            {{blog.title}}
          </h4>
          <p>
