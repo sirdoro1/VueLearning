@@ -4,10 +4,10 @@
     <div >
       <div v-back-rainbow v-for="(blog,index) in blogs" v-bind:key="index" class=" card card-body my-2">
          <h4 v-rainbow>
-           {{blog.title}}
+           {{blog.title | to-uppercase}}
          </h4>
          <p>
-           {{blog.body}}
+           {{blog.body | to-snippet}}
          </p>
       </div>
     </div>
